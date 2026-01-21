@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/multi_finger_screen.dart';
 import 'screens/picture_in_picture_screen.dart';
+import 'screens/superellipse_comparison_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,6 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const MultiFingerScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('RSuperellipse比較'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const SuperellipseComparisonScreen(),
+                  ),
                 );
               },
             ),
