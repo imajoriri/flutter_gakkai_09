@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/multi_finger_screen.dart';
 import 'screens/picture_in_picture_screen.dart';
 
 void main() {
@@ -49,6 +50,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   MaterialPageRoute(
                     builder: (_) => const PictureInPictureScreen(),
                   ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('マルチタッチジェスチャー'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const MultiFingerScreen()),
                 );
               },
             ),
