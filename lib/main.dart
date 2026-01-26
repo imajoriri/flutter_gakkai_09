@@ -76,17 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: const Text('RSuperellipse比較'),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SuperellipseComparisonScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
               title: const Text('Popover サンプル'),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
@@ -101,6 +90,17 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const MenuAnchorScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('RSuperellipse比較'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const SuperellipseComparisonScreen(),
+                  ),
                 );
               },
             ),
