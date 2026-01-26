@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'screens/menu_anchor_screen.dart';
 import 'screens/multi_finger_screen.dart';
 import 'screens/picture_in_picture_screen.dart';
+import 'screens/popover_screen.dart';
+import 'screens/snackbar_screen.dart';
 import 'screens/superellipse_comparison_screen.dart';
 
 void main() {
@@ -44,6 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             ListTile(
+              title: const Text('onTap'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const SnackbarScreen()),
+                );
+              },
+            ),
+            ListTile(
               title: const Text('Picture in Picture'),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
@@ -71,6 +83,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   MaterialPageRoute(
                     builder: (_) => const SuperellipseComparisonScreen(),
                   ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Popover サンプル'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const PopoverScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('MenuAnchor サンプル'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const MenuAnchorScreen()),
                 );
               },
             ),
