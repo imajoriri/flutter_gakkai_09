@@ -16,11 +16,11 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
 
   // 触った瞬間に追従しつつ、離したら気持ちよく中央へ戻る程度のバネ設定。
   // ここは好みで調整してOK。
-  static const SpringDescription _spring = SpringDescription(
-    mass: 1.0,
-    stiffness: 420.0,
-    damping: 28.0,
-  );
+  static final SpringDescription _spring =
+      SpringDescription.withDurationAndBounce(
+        duration: Duration(milliseconds: 1000),
+        bounce: 0.3,
+      );
 
   Offset get _offset => Offset(_xController.value, _yController.value);
 
@@ -32,14 +32,20 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
   @override
   void initState() {
     super.initState();
-    _xController = AnimationController.unbounded(vsync: this)
-      ..addListener(() {
-        setState(() {});
-      });
-    _yController = AnimationController.unbounded(vsync: this)
-      ..addListener(() {
-        setState(() {});
-      });
+    _xController =
+        AnimationController.unbounded(
+          vsync: this,
+          duration: Duration(milliseconds: 1000),
+        )..addListener(() {
+          setState(() {});
+        });
+    _yController =
+        AnimationController.unbounded(
+          vsync: this,
+          duration: Duration(milliseconds: 1000),
+        )..addListener(() {
+          setState(() {});
+        });
 
     _setOffset(Offset.zero);
   }
