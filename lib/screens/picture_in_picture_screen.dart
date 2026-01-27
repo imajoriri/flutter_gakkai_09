@@ -62,17 +62,6 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
     _yController.stop();
   }
 
-  void _springToCenter({required Offset velocity}) {
-    _stopSpring();
-
-    _xController.animateWith(
-      SpringSimulation(_spring, _offset.dx, 0.0, velocity.dx),
-    );
-    _yController.animateWith(
-      SpringSimulation(_spring, _offset.dy, 0.0, velocity.dy),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -95,14 +84,23 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
                 child: Transform.translate(
                   offset: _offset,
                   child: GestureDetector(
-                    onPanStart: (_) => _stopSpring(),
+                    onPanStart: (_) {
+                      _stopSpring();
+                    },
                     onPanUpdate: (details) {
-                      _setOffset(_offset + details.delta);
+                      final offset = _offset + details.delta;
+                      _xController.value = offset.dx;
+                      _yController.value = offset.dy;
                     },
                     onPanEnd: (details) {
-                      // pixelsPerSecond は端末座標系。中央へ戻すのでそのままOK。
-                      _springToCenter(
-                        velocity: details.velocity.pixelsPerSecond,
+                      _stopSpring();
+                      final velocity = details.velocity.pixelsPerSecond;
+
+                      _xController.animateWith(
+                        SpringSimulation(_spring, _offset.dx, 0.0, velocity.dx),
+                      );
+                      _yController.animateWith(
+                        SpringSimulation(_spring, _offset.dy, 0.0, velocity.dy),
                       );
                     },
                     child: Container(
