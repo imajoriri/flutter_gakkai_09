@@ -94,7 +94,7 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
                 alignment: Alignment.center,
                 child: Transform.translate(
                   offset: _offset,
-                  child: _FloatingPip(
+                  child: GestureDetector(
                     onPanStart: (_) => _stopSpring(),
                     onPanUpdate: (details) {
                       _setOffset(_offset + details.delta);
@@ -105,50 +105,29 @@ class _PictureInPictureScreenState extends State<PictureInPictureScreen>
                         velocity: details.velocity.pixelsPerSecond,
                       );
                     },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      width: 180,
+                      height: 120,
+                      child: Text(
+                        'PiP',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           );
         },
-      ),
-    );
-  }
-}
-
-class _FloatingPip extends StatelessWidget {
-  const _FloatingPip({
-    required this.onPanStart,
-    required this.onPanUpdate,
-    required this.onPanEnd,
-  });
-
-  final GestureDragStartCallback onPanStart;
-  final GestureDragUpdateCallback onPanUpdate;
-  final GestureDragEndCallback onPanEnd;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanStart: onPanStart,
-      onPanUpdate: onPanUpdate,
-      onPanEnd: onPanEnd,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        width: 180,
-        height: 120,
-        child: Text(
-          'PiP',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
       ),
     );
   }
