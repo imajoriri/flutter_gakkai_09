@@ -45,30 +45,6 @@ class _MultiFingerScreenState extends State<MultiFingerScreen>
     super.dispose();
   }
 
-  void _onScaleStart(ScaleStartDetails details) {
-    if (details.pointerCount == 2) {
-      _scaleStartFocalPoint = details.focalPoint;
-    }
-  }
-
-  void _onScaleUpdate(ScaleUpdateDetails details) {
-    if (details.pointerCount == 2 && _scaleStartFocalPoint != null) {
-      final delta = details.focalPoint - _scaleStartFocalPoint!;
-      // 横方向へのスワイプを検出（左右どちらでも）
-      if (delta.dx.abs() > _swipeThreshold && !_isSelectionMode) {
-        setState(() {
-          _isSelectionMode = true;
-          _scaleStartFocalPoint = null;
-        });
-        _animationController.forward();
-      }
-    }
-  }
-
-  void _onScaleEnd(ScaleEndDetails details) {
-    _scaleStartFocalPoint = null;
-  }
-
   void _toggleSelection(int index) {
     setState(() {
       if (_selectedIndices.contains(index)) {
@@ -117,9 +93,27 @@ class _MultiFingerScreenState extends State<MultiFingerScreen>
             : null,
       ),
       body: GestureDetector(
-        onScaleStart: _onScaleStart,
-        onScaleUpdate: _onScaleUpdate,
-        onScaleEnd: _onScaleEnd,
+        onScaleStart: (details) {
+          if (details.pointerCount == 2) {
+            _scaleStartFocalPoint = details.focalPoint;
+          }
+        },
+        onScaleUpdate: (details) {
+          if (details.pointerCount == 2 && _scaleStartFocalPoint != null) {
+            final delta = details.focalPoint - _scaleStartFocalPoint!;
+            // 横方向へのスワイプを検出（左右どちらでも）
+            if (delta.dx.abs() > _swipeThreshold && !_isSelectionMode) {
+              setState(() {
+                _isSelectionMode = true;
+                _scaleStartFocalPoint = null;
+              });
+              _animationController.forward();
+            }
+          }
+        },
+        onScaleEnd: (details) {
+          _scaleStartFocalPoint = null;
+        },
         child: ListView.builder(
           itemCount: _mailItems.length,
           itemBuilder: (context, index) {
