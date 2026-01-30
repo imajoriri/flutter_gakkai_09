@@ -97,6 +97,18 @@ class MenuAnchorScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: TextField(
+                onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: '入力',
+                  hintText: 'テキストを入力',
+                ),
+              ),
+            ),
           ],
         ),
       ),
