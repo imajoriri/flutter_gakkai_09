@@ -56,6 +56,15 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
+              title: const Text('マルチタッチジェスチャー'),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const MultiFingerScreen()),
+                );
+              },
+            ),
+            ListTile(
               title: const Text('Picture in Picture'),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
@@ -63,15 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   MaterialPageRoute(
                     builder: (_) => const PictureInPictureScreen(),
                   ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('マルチタッチジェスチャー'),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const MultiFingerScreen()),
                 );
               },
             ),
