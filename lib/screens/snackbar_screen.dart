@@ -9,40 +9,45 @@ class SnackbarScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(backgroundColor: theme.colorScheme.inversePrimary),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 16,
-          children: [
-            GestureDetector(
-              child: ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('シングルタップ')));
-                },
-                child: const Text('onTapのみ!!'),
+      body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: [
+              const SizedBox(height: 200),
+              GestureDetector(
+                child: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(const SnackBar(content: Text('シングルタップ')));
+                  },
+                  child: const Text('onTapのみ!!'),
+                ),
               ),
-            ),
-            GestureDetector(
-              onDoubleTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('ダブルタップ'),
-                    backgroundColor: Colors.blue,
-                  ),
-                );
-              },
-              child: ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('シングルタップ')));
+              GestureDetector(
+                onDoubleTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('ダブルタップ'),
+                      backgroundColor: Colors.blue,
+                    ),
+                  );
                 },
-                child: const Text('onTapとonDoubleTap!!'),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(const SnackBar(content: Text('シングルタップ')));
+                  },
+                  child: const Text('onTapとonDoubleTap!!'),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 200),
+            ],
+          ),
         ),
       ),
     );
